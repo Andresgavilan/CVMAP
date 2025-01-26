@@ -10,6 +10,10 @@
       rel="stylesheet"
     />
     <style>
+      * {
+        box-sizing: border-box;
+      }
+      
       body {
         color: #404040;
         font:
@@ -20,9 +24,22 @@
         padding: 0;
         -webkit-font-smoothing: antialiased;
       }
+      
+      h1 {
+        font-size: 22px;
+        margin: 0;
+        font-weight: 400;
+        line-height: 20px;
+        padding: 20px 2px;
+      }
 
-      * {
-        box-sizing: border-box;
+      a {
+        color: #404040;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #101010;
       }
 
       .sidebar {
@@ -41,23 +58,6 @@
         width: 66.6666%;
         top: 0;
         bottom: 0;
-      }
-
-      h1 {
-        font-size: 22px;
-        margin: 0;
-        font-weight: 400;
-        line-height: 20px;
-        padding: 20px 2px;
-      }
-
-      a {
-        color: #404040;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: #101010;
       }
 
       .heading {
@@ -191,14 +191,14 @@
     
     
     <script>
-      mapboxgl.accessToken = '{{MAPBOX_ACCESS_TOKEN}}';
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVzZ2F2aWxhbiIsImEiOiJja2wyd2Z3dXcwZDE3MnVwMTlhcnNieDhxIn0.f_iLJPAJJUyEXEkm7itrZw';
 
       /**
        * Add the map to the page
        */
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/light-v11',
+        style: 'mapbox://styles/andresgavilan/cm6ctltxn007x01qxbmnc3vuc',
         center: [-77.034084142948, 38.909671288923],
         zoom: 13,
         scrollZoom: false
