@@ -199,215 +199,181 @@
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/andresgavilan/cm6ctltxn007x01qxbmnc3vuc',
-        center: [-77.034084142948, 38.909671288923],
-        zoom: 13,
+        center: [-7.034084142948, 3.909671288923],
+        zoom: 1,
         scrollZoom: false
       });
 
-      const stores = {
-        'type': 'FeatureCollection',
-        'features': [
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.034084142948, 38.909671288923]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 234-7336',
-              'phone': '2022347336',
-              'address': '1471 P St NW',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'at 15th St NW',
-              'postalCode': '20005',
-              'state': 'D.C.'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.049766, 38.900772]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 507-8357',
-              'phone': '2025078357',
-              'address': '2221 I St NW',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'at 22nd St NW',
-              'postalCode': '20037',
-              'state': 'D.C.'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.043929, 38.910525]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 387-9338',
-              'phone': '2023879338',
-              'address': '1512 Connecticut Ave NW',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'at Dupont Circle',
-              'postalCode': '20036',
-              'state': 'D.C.'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.0672, 38.90516896]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 337-9338',
-              'phone': '2023379338',
-              'address': '3333 M St NW',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'at 34th St NW',
-              'postalCode': '20007',
-              'state': 'D.C.'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.002583742142, 38.887041080933]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 547-9338',
-              'phone': '2025479338',
-              'address': '221 Pennsylvania Ave SE',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'btwn 2nd & 3rd Sts. SE',
-              'postalCode': '20003',
-              'state': 'D.C.'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-76.933492720127, 38.99225245786]
-            },
-            'properties': {
-              'address': '8204 Baltimore Ave',
-              'city': 'College Park',
-              'country': 'United States',
-              'postalCode': '20740',
-              'state': 'MD'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.097083330154, 38.980979]
-            },
-            'properties': {
-              'phoneFormatted': '(301) 654-7336',
-              'phone': '3016547336',
-              'address': '4831 Bethesda Ave',
-              'cc': 'US',
-              'city': 'Bethesda',
-              'country': 'United States',
-              'postalCode': '20814',
-              'state': 'MD'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.359425054188, 38.958058116661]
-            },
-            'properties': {
-              'phoneFormatted': '(571) 203-0082',
-              'phone': '5712030082',
-              'address': '11935 Democracy Dr',
-              'city': 'Reston',
-              'country': 'United States',
-              'crossStreet': 'btw Explorer & Library',
-              'postalCode': '20190',
-              'state': 'VA'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.10853099823, 38.880100922392]
-            },
-            'properties': {
-              'phoneFormatted': '(703) 522-2016',
-              'phone': '7035222016',
-              'address': '4075 Wilson Blvd',
-              'city': 'Arlington',
-              'country': 'United States',
-              'crossStreet': 'at N Randolph St.',
-              'postalCode': '22203',
-              'state': 'VA'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-75.28784, 40.008008]
-            },
-            'properties': {
-              'phoneFormatted': '(610) 642-9400',
-              'phone': '6106429400',
-              'address': '68 Coulter Ave',
-              'city': 'Ardmore',
-              'country': 'United States',
-              'postalCode': '19003',
-              'state': 'PA'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-75.20121216774, 39.954030175164]
-            },
-            'properties': {
-              'phoneFormatted': '(215) 386-1365',
-              'phone': '2153861365',
-              'address': '3925 Walnut St',
-              'city': 'Philadelphia',
-              'country': 'United States',
-              'postalCode': '19104',
-              'state': 'PA'
-            }
-          },
-          {
-            'type': 'Feature',
-            'geometry': {
-              'type': 'Point',
-              'coordinates': [-77.043959498405, 38.903883387232]
-            },
-            'properties': {
-              'phoneFormatted': '(202) 331-3355',
-              'phone': '2023313355',
-              'address': '1901 L St. NW',
-              'city': 'Washington DC',
-              'country': 'United States',
-              'crossStreet': 'at 19th St',
-              'postalCode': '20036',
-              'state': 'D.C.'
-            }
-          }
-        ]
-      };
+const trabajos = {
+  'type': 'FeatureCollection',
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Where":"Moviconsult",
+        "Title": "Exploring Transport Planning in Colombia",
+        "Date": "2017",
+        "City": "Bogotá, Colombia",
+        "Subtitle": "Project Engineer",
+        "Description": "Stakeholder reporting on sustainable mobility, road safety audits, micro-mobility, road design assessments, and infrastructure. Responsible for document and contract management, as well as QA/QC. Conducted data and geographic analysis for private and public transportation networks.",
+        "More_Info": "Stakeholder reporting on sustainable mobility, road safety audits, micro-mobility, road design assessments and infrastructure. Document and contract management, QA/QC. Data and geographic analysis for private and public transportation networks."
+      },
+      "geometry": {
+        "coordinates": [
+          -74.054352,
+          4.704099
+        ],
+        "type": "Point"
+      },
+      "id": "19090d9848e0c1e520cbf98f8922d77e"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "Hyundai CRADLE",
+        "Title": "Unveiling the Dynamics of VC and Innovation in Europe",
+        "Date": "2020",
+        "City": "Berlin, Germany",
+        "Subtitle": "Operations and Research Associate",
+        "Description": "Researched innovative technologies, partnerships, and opinion leaders in the EU, with a focus on energy storage systems, digital twins, and urban air mobility. Assisted in improving office work process standards. Developed a database tool for managing start-ups.",
+        "More_Info": "Research on innovative technologies, partnerships, and opinion leaders in the EU (Energy Storage systems, Digital Twins, Urban Air Mobility). Assistance in improving office work process standards. Elaborate a database tool for the management of Start-Ups."
+      },
+      "geometry": {
+        "coordinates": [
+          13.375905,
+          52.509298
+        ],
+        "type": "Point"
+      },
+      "id": "238d0a6d93d67b0c7106ea28974d1135"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "ICLEI e.V",
+        "Title": "International Cooperation in Sustainable Mobility Initiatives",
+        "Date": "2022",
+        "City": "Bonn, Germany",
+        "Subtitle": "Sustainable Mobility officer",
+        "Description": "Risk management in the implementation of pilot projects in the digitalization of mobility and freight transport in the global south. Ease and coordinate good communication between multilateral partners. Assessment and forecast of new mobility concepts on worldwide markets.",
+        "More_Info": "Traffic Engineering"
+
+      },
+      "geometry": {
+        "coordinates": [
+          7.114373,
+          50.721909
+        ],
+        "type": "Point"
+      },
+      "id": "346da646886e096d8170bf33c791b002"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "U Santo Tomas",
+        "Title": "Pursuing Civil Engineering in Bogotá",
+        "Date": "2012",
+        "City": "Bogotá, Colombia",
+        "Subtitle": "Civil Engineering Student",
+        "Description": "Taught modules in road design and project management for 2 years.     Focused on optimizing space and promoting sustainable mobility in Bogota.    Developed projects to improve student relations and campus leadership skills in multidisciplinary working environments.",
+        "More_Info": "Taught modules in road design and project management for two years, with a research focus on optimizing public space and promoting sustainable mobility. Developed initiatives to improve student relations and encourage campus leadership in multidisciplinary work environments."
+
+      },
+      "geometry": {
+        "coordinates": [
+          -74.064428,
+          4.638177
+        ],
+        "type": "Point"
+      },
+      "id": "48c21f3e692d67713ed449f8f9710464"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "ZEKI e.V",
+        "Title": "AI Asset Integration for Mobility, Smart Spaces, and Cybersecurity",
+        "Date": "2024",
+        "City": "Berlin, Germany",
+        "Subtitle": "Project Assistant",
+        "Description": "Support the setting up of ZEKI space (Center for Tangible Artificial Intelligence and Digitalization).    Keep updated the documentation of BeIntelli project for the use of AI in urban mobility.    Ease and coordinate the communication between multilateral partners from private and public entities, organizing network events.",
+        "More_Info": "Supported the establishment of the ZEKI Space (Center for Tangible Artificial Intelligence and Digitalization). Maintained and updated documentation for the BeIntelli project, focusing on the use of AI in urban mobility. Facilitated and coordinated communication between multilateral partners from private and public entities, organizing networking events."
+
+      },
+      "geometry": {
+        "coordinates": [
+          13.321841,
+          52.512623
+        ],
+        "type": "Point"
+      },      "id": "4e4206a8b3b78fa272a54f97ea09f025"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "TU Berlin",
+        "Title": "Mastering Sustainable Mobility Management in Berlin",
+        "Date": "2018",
+        "City": "Berlin, Germany",
+        "Subtitle": "MBA Student",
+        "Description": "Focus on the study of project planning, design and management of intelligent mobility networks. Dissertation on the scale-up of mobility hubs, challenges of public-private partnerships, funding schemes and implementation. Involvement in extracurricular activities such as a mobility club, participation in various hackathons, and volunteering in international networks for sustainable transport and urban development.",
+        "More_Info": "Focused on the study of project planning, design, and management of intelligent mobility networks. Completed a dissertation on the scale-up of mobility hubs, addressing challenges in public-private partnerships, funding schemes, and implementation. Active involvement in extracurricular activities, including a mobility club, participation in various hackathons, and volunteering with international networks for sustainable transport and urban development."
+
+      },
+      "geometry": {
+        "coordinates": [
+          13.356268,
+          52.481515
+        ],
+        "type": "Point"
+      },
+      "id": "bca9a0d7f1e4410119114b2a5a72b497"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "Cal y Mayor",
+        "Title": "Modeling and Designing Future Transit and Mobility Solutions",
+        "Date": "2021",
+        "City": "Bogotá, Colombia",
+        "Subtitle": "Traffic Engineering",
+        "Description": "Design public transport and sustainable mobility operations in Bogota. Lead and coordinate reporting of project procurement to clients from public and private sectors. Communicate and network with external partners and customers.",
+        "More_Info": "Designed public transport and sustainable mobility operations in Bogotá. Led and coordinated reporting on project procurement for clients in both public and private sectors. Facilitated communication and networking with external partners and customers."
+
+      },
+      "geometry": {
+        "coordinates": [
+          -74.059699,
+          4.672004
+        ],
+        "type": "Point"
+      },
+      "id": "d296715b11354582cc77eaf407ffd46f"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Where": "DLR",
+        "Title": "Mapping the Journey of Cargo Bikes in Germany",
+        "Date": "2019",
+        "City": "Berlin, Germany",
+        "Subtitle": "Research support",
+        "Description": "Analysis of economic and logistic concepts for freight transport in Germany. Reporting and sampling of geographic and network information base for exploratory research in the areas of logistics and urban development. Analysis of novel solutions for urban freight for districts in Berlin.",
+        "More_Info": "Analyzed economic and logistic concepts for freight transport in Germany. Conducted reporting and sampling of geographic and network information for exploratory research in logistics and urban development. Evaluated novel solutions for urban freight in districts across Berlin."
+
+      },
+      "geometry": {
+        "coordinates": [
+          13.540949,
+          52.435278
+        ],
+        "type": "Point"
+      },
+      "id": "ddc83d4ad7bf0f03c884c944bca8e791"
+    }
+  ]
+};
 
       /**
        * Assign a unique id to each store. You'll use this `id`
@@ -426,9 +392,20 @@
          * This is where your '.addLayer()' used to be, instead
          * add only the source without styling a layer
          */
-        map.addSource('places', {
-          'type': 'geojson',
-          'data': stores
+         map.addSource('locations',{
+          type: 'geojson',
+          data: trabajos
+         });
+
+
+        map.addLayer({
+          id: 'locations',
+          type: 'symbol',
+        source: 'locations',
+        layout: {
+          'icon-image':'marker',
+          'icon-size':1.5,
+        }
         });
 
         /**
@@ -436,7 +413,7 @@
          * - The location listings on the side of the page
          * - The markers onto the map
          */
-        buildLocationList(stores);
+        buildLocationList(trabajos);
         addMarkers();
         map.on('click', (event) => {
   /* Determine if a feature in the "locations" layer exists at that point. */
