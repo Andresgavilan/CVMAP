@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Demo: Build a store locator using Mapbox GL JS</title>
+    <title>Andres Gavilan CV in a Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
     <link
@@ -127,7 +127,8 @@
         cursor: pointer;
         height: 56px;
         width: 56px;
-        background-image: url('https://docs.mapbox.com/demos/building-a-store-locator/marker.png');
+        background-image: url('marker.png');
+        transition: transform 0.3s;
       }
 
       /* Marker tweaks */
@@ -183,7 +184,7 @@
   <body>
     <div class="sidebar">
       <div class="heading">
-        <h1>Our locations</h1>
+        <h1>Relevant Experience</h1>
       </div>
       <div id="listings" class="listings"></div>
     </div>
@@ -198,9 +199,9 @@
        */
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/andresgavilan/cm6ctltxn007x01qxbmnc3vuc',
-        center: [-7.034084142948, 3.909671288923],
-        zoom: 1,
+        style: 'mapbox://styles/andresgavilan/cm6fj6m4p00bq01safwws6ryi',
+        center: [-35.221901, 27.616228],
+        zoom: 3.2,
         scrollZoom: false
       });
 
@@ -276,7 +277,7 @@ const trabajos = {
         "Date": "2012",
         "City": "Bogotá, Colombia",
         "Subtitle": "Civil Engineering Student",
-        "Description": "Taught modules in road design and project management for 2 years.     Focused on optimizing space and promoting sustainable mobility in Bogota.    Developed projects to improve student relations and campus leadership skills in multidisciplinary working environments.",
+        "Description": "Taught modules in road design and project management for 2 years. Focused on optimizing space and promoting sustainable mobility in Bogota. Developed projects to improve student relations and campus leadership skills in multidisciplinary working environments.",
         "More_Info": "Taught modules in road design and project management for two years, with a research focus on optimizing public space and promoting sustainable mobility. Developed initiatives to improve student relations and encourage campus leadership in multidisciplinary work environments."
 
       },
@@ -297,15 +298,12 @@ const trabajos = {
         "Date": "2024",
         "City": "Berlin, Germany",
         "Subtitle": "Project Assistant",
-        "Description": "Support the setting up of ZEKI space (Center for Tangible Artificial Intelligence and Digitalization).    Keep updated the documentation of BeIntelli project for the use of AI in urban mobility.    Ease and coordinate the communication between multilateral partners from private and public entities, organizing network events.",
+        "Description": "Support the setting up of ZEKI space (Center for Tangible Artificial Intelligence and Digitalization). Keep updated the documentation of BeIntelli project for the use of AI in urban mobility.    Ease and coordinate the communication between multilateral partners from private and public entities, organizing network events.",
         "More_Info": "Supported the establishment of the ZEKI Space (Center for Tangible Artificial Intelligence and Digitalization). Maintained and updated documentation for the BeIntelli project, focusing on the use of AI in urban mobility. Facilitated and coordinated communication between multilateral partners from private and public entities, organizing networking events."
 
       },
       "geometry": {
-        "coordinates": [
-          13.321841,
-          52.512623
-        ],
+        "coordinates": [13.321841, 52.512623],
         "type": "Point"
       },      "id": "4e4206a8b3b78fa272a54f97ea09f025"
     },
@@ -375,6 +373,12 @@ const trabajos = {
   ]
 };
 
+        // Sort the features array by Date in descending order
+        trabajos.features.sort((a, b) => parseInt(b.properties.Date) - parseInt(a.properties.Date));
+
+        // Display sorted features (for demonstration purposes)
+        console.log(trabajos);
+
       /**
        * Assign a unique id to each store. You'll use this `id`
        * later to associate each point on the map with a listing
@@ -396,55 +400,56 @@ const trabajos = {
           type: 'geojson',
           data: trabajos
          });
-
-
-        map.addLayer({
-          id: 'locations',
-          type: 'symbol',
-        source: 'locations',
-        layout: {
-          'icon-image':'marker',
-          'icon-size':1.5,
-        }
-        });
-
-        /**
+                })       /**
          * Add all the things to the page:
          * - The location listings on the side of the page
          * - The markers onto the map
          */
-        buildLocationList(trabajos);
-        addMarkers();
+
         map.on('click', (event) => {
-  /* Determine if a feature in the "locations" layer exists at that point. */
-  const features = map.queryRenderedFeatures(event.point, {
-    layers: ['locations']
-  });
+              /* Determine if a feature in the "locations" layer exists at that point. */
+              const features = map.queryRenderedFeatures(event.point, {
+                layers: ['locations']
+              });
+          
+              /* If it does not exist, return */
+              if (!features.length) return;
+          
+              const clickedPoint = features[0];
+              /* Fly to the point */
+              flyToStore(clickedPoint);
+              /* Close all other popups and display popup for clicked store */
+              createPopUp(clickedPoint);
+              /* Highlight listing in sidebar (and remove highlight for all other listings) */
+              const activeItem = document.getElementsByClassName('active');
+              if (activeItem[0]) {
+                activeItem[0].classList.remove('active');
+              }
+              const listing = document.getElementById(
+                `listing-${clickedPoint.properties.id}`
+              );
+              listing.classList.add('active');
+            });
 
-  /* If it does not exist, return */
-  if (!features.length) return;
+          buildLocationList(trabajos);
 
-  const clickedPoint = features[0];
+            link.addEventListener('click', function () {
+                for (const feature of trabajos.features) {
+                  if (this.id === `link-${feature.properties.id}`) {
+                    flyToStore(feature);
+                    createPopUp(feature);
+                  }
+                }
+                const activeItem = document.getElementsByClassName('active');
+                if (activeItem[0]) {
+                  activeItem[0].classList.remove('active');
+                }
+                this.parentNode.classList.add('active');
+              });
 
-  /* Fly to the point */
-  flyToStore(clickedPoint);
 
-  /* Close all other popups and display popup for clicked store */
-  createPopUp(clickedPoint);
 
-  /* Highlight listing in sidebar (and remove highlight for all other listings) */
-  const activeItem = document.getElementsByClassName('active');
-  if (activeItem[0]) {
-    activeItem[0].classList.remove('active');
-  }
-  const listing = document.getElementById(
-    `listing-${clickedPoint.properties.id}`
-  );
-  listing.classList.add('active');
-});
-      });
-
-      /**
+        addMarkers();      /**
        * Add a marker to the map for every store listing.
        **/
       function addMarkers() {
@@ -508,16 +513,17 @@ const trabajos = {
           link.href = '#';
           link.className = 'title';
           link.id = `link-${trabajo.properties.id}`;
-          link.innerHTML = `${trabajo.properties.Where}`;
+          link.innerHTML = `${trabajo.properties.Title}`;
 
           /* Add details to the individual listing. */
           const details = listing.appendChild(document.createElement('div'));
-          details.innerHTML = `${trabajo.properties.City}`;
+          details.innerHTML = `${trabajo.properties.Where}`;
           if (trabajo.properties.Subtitle) {
+            details.innerHTML += ` &middot; ${trabajo.properties.City}`;
             details.innerHTML += ` &middot; ${trabajo.properties.Date}`;
           }
     if (trabajo.properties.distance) {
-      const roundedDistance = Math.round(trabajo.properties.distance * 100) / 100;
+      const roundedDistance = Math.round(trabajo.properties.distance * 5) / 1;
       details.innerHTML += `<div><strong>${roundedDistance} metre away</strong></div>`;
     }
   }
@@ -529,20 +535,7 @@ const trabajos = {
            * 3. Close all other popups and display popup for clicked store
            * 4. Highlight listing in sidebar (and remove highlight for all other listings)
            **/
-          link.addEventListener('click', function () {
-            for (const feature of stores.features) {
-              if (this.id === `link-${feature.properties.id}`) {
-                flyToStore(feature);
-                createPopUp(feature);
-              }
-            }
-            const activeItem = document.getElementsByClassName('active');
-            if (activeItem[0]) {
-              activeItem[0].classList.remove('active');
-            }
-            this.parentNode.classList.add('active');
-          });
-        
+ 
 
       /**
        * Use Mapbox GL JS's `flyTo` to move the camera smoothly
@@ -555,29 +548,22 @@ const trabajos = {
         });
       }
 
+
       /**
        * Create a Mapbox GL JS `Popup`.
        **/
       function createPopUp(currentFeature) {
         const popUps = document.getElementsByClassName('mapboxgl-popup');
         if (popUps[0]) popUps[0].remove();
+
         const popup = new mapboxgl.Popup({ closeOnClick: false })
           .setLngLat(currentFeature.geometry.coordinates)
           .setHTML(
-            `<h3>Sweetgreen</h3><h4>${currentFeature.properties.Where}</h4>`
-          )
+                `<h3>Descrption</h3><h4><Strong>${currentFeature.properties.Where}</Strong></h4>
+                <ul>${currentFeature.properties.Description.split('. ').map(sentence => `<li>${sentence}</li>`).join('')}</ul>`
+              )
           .addTo(map);
       }
     </script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
