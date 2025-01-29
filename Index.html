@@ -44,7 +44,7 @@
 
       .sidebar {
         position: absolute;
-        width: 33.3333%;
+        width: 85%;
         height: 100%;
         top: 0;
         left: 0;
@@ -54,10 +54,27 @@
 
       .map {
         position: absolute;
-        left: 33.3333%;
-        width: 66.6666%;
+        left: 33.33333%;
+        width: 66.66666%;
         top: 0;
         bottom: 0;
+      }
+
+      @media (min-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: static; /* Allow scrolling on small screens */
+        }
+
+        .map {
+          width: 100%;
+          height: calc(100%-200px); /* Adjust height to accommodate the sidebar */
+        }
+
+        .mapboxgl-popup-content {
+          width: 400px; /* Full-width popups on smaller screens */
+        }
       }
 
       .heading {
@@ -66,7 +83,7 @@
         min-height: 60px;
         line-height: 60px;
         padding: 0 10px;
-        background-color: #00853e;
+        background-color: #156991;
         color: #fff;
       }
 
@@ -89,7 +106,7 @@
 
       .listings .item .title {
         display: block;
-        color: #00853e;
+        color: #156991;
         font-weight: 700;
       }
 
@@ -130,33 +147,66 @@
         background-image: url('marker.png');
         transition: transform 0.3s;
       }
+      
+      .marker {
+        background-size: cover; /* Ensure the marker fits perfectly */
+        transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
+      }
+
+      .marker:hover {
+        transform: scale(1.2); /* Enlarge on hover */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+      }
+
+      .marker:active {
+        transform: scale(1.3); /* Slightly larger on click */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Enhance shadow */
+      }
 
       /* Marker tweaks */
       .mapboxgl-popup {
         padding-bottom: 50px;
+        max-width: 300px; /* Adjust maximum popup width */
+        min-width: 250px;
       }
 
       .mapboxgl-popup-close-button {
-        display: none;
-      }
+        display: block; /* Restore close button */
+        background: transparent;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+  }
 
       .mapboxgl-popup-content {
-        font:
-          400 15px/22px 'Source Sans Pro',
-          'Helvetica Neue',
-          sans-serif;
-        padding: 0;
-        width: 180px;
+        font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+        padding: 10px;
+        width: 400px; /* Slightly wider for better readability */
+        border-radius: 5px; /* Softer corners */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
       }
 
       .mapboxgl-popup-content h3 {
-        background: #91c949;
-        color: #fff;
-        margin: 0;
-        padding: 10px;
-        border-radius: 3px 3px 0 0;
-        font-weight: 700;
-        margin-top: -15px;
+        font-size: 20px; /* Larger header */
+        text-align: center;
+        background: #00853e;
+        color: white;
+        padding: 15px;
+        border-radius: 12px 12px 0 0;
+        margin: -20px -20px 15px;
+      }
+
+      .mapboxgl-popup-content p {
+        font-size: 16px;
+      }
+
+      .mapboxgl-popup-content img {
+        width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
       }
 
       .mapboxgl-popup-content h4 {
@@ -167,7 +217,27 @@
 
       .mapboxgl-popup-content div {
         padding: 10px;
+        font-size: 14px; /* Ensure consistent sizing */
+        line-height: 1.5; /* Improve readability */
+        color: #333; /* Softer text color */
       }
+
+      .mapboxgl-popup-close-button {
+        display: block; /* Restore close button */
+        background: transparent;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+     
+
+      .mapboxgl-popup {
+        max-width: 300px; /* Adjust maximum popup width */
+        min-width: 250px;
+}
 
       .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
         margin-top: 15px;
@@ -193,9 +263,9 @@
        */
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/andresgavilan/cm6fj6m4p00bq01safwws6ryi',
+        style: 'mapbox://styles/andresgavilan/cm6h3b8x6002d01sderoi6une',
         center: [-35.221901, 27.616228],
-        zoom: 3.2,
+        zoom: 2.5,
         scrollZoom: true
       });
 
@@ -214,7 +284,7 @@
               "Date": "2017",
               "City": "Bogotá, Colombia",
               "Subtitle": "Project Engineer",
-              "Description": "Stakeholder reporting on sustainable mobility, road safety audits, micro-mobility, road design assessments, and infrastructure. Responsible for document and contract management, as well as QA/QC. Conducted data and geographic analysis for private and public transportation networks.",
+              "Description": "Development of transport models, by exploratory, and econometric methods, data analyst and modeler. Support experts in the diligence in all phases of projects with public customers, in Bogota and other cities of Latino America. Aligned to sustainable mobility, public transport, pedestrian and bike infrastructure. Document bids applications and support the technical chapters.",
               "More_Info": "Stakeholder reporting on sustainable mobility, road safety audits, micro-mobility, road design assessments and infrastructure. Document and contract management, QA/QC. Data and geographic analysis for private and public transportation networks."
             },
             "id": "19090d9848e0c1e520cbf98f8922d77e"
@@ -248,7 +318,7 @@
               "Date": "2022",
               "City": "Bonn, Germany",
               "Subtitle": "Sustainable Mobility officer",
-              "Description": "Risk management in the implementation of pilot projects in the digitalization of mobility and freight transport in the global south. Ease and coordinate good communication between multilateral partners. Assessment and forecast of new mobility concepts on worldwide markets.",
+              "Description": "Implementation of pilot projects in the digitalization of mobility and freight transport in the global south. Research and forecast on innovation and future mobility in freight transport and data for policy making worldwide. Facilitate and coordinate good communication between multilateral partners. Initiate and maintain communication with project stakeholders.",
               "More_Info": "Traffic Engineering"
             },
             "id": "346da646886e096d8170bf33c791b002"
@@ -281,8 +351,8 @@
               "Title": "AI Asset Integration for Mobility, Smart Spaces, and Cybersecurity",
               "Date": "2024",
               "City": "Berlin, Germany",
-              "Subtitle": "Project Assistant",
-              "Description": "Support the setting up of ZEKI space (Center for Tangible Artificial Intelligence and Digitalization). Keep updated the documentation of BeIntelli project for the use of AI in urban mobility.    Ease and coordinate the communication between multilateral partners from private and public entities, organizing network events.",
+              "Subtitle": "WM - Project Assistant",
+              "Description": "Management of office assets and activities for autonomous mobility, Smart spaces, and cybersecurity. Keep updated the documentation of BeIntelli project for the use of AI in urban mobility. Ease and coordinate the communication between multilateral partners from investors, researchers, and students.",
               "More_Info": "Supported the establishment of the ZEKI Space (Center for Tangible Artificial Intelligence and Digitalization). Maintained and updated documentation for the BeIntelli project, focusing on the use of AI in urban mobility. Facilitated and coordinated communication between multilateral partners from private and public entities, organizing networking events."
             },    
             "id": "4e4206a8b3b78fa272a54f97ea09f025"
@@ -333,7 +403,7 @@
               "Date": "2019",
               "City": "Berlin, Germany",
               "Subtitle": "Research support",
-              "Description": "Analysis of economic and logistic concepts for freight transport in Germany. Reporting and sampling of geographic and network information base for exploratory research in the areas of logistics and urban development. Analysis of novel solutions for urban freight for districts in Berlin.",
+              "Description": "Reviewed and forecast logistics concepts, reporting multivariable analysis for cargo bike projects in Germany. Report and sample geographic information base in exploratory research, for logistics and urban development, predicting e-commerce and courier resilience. Study novel cargo bike concepts for medium and small businesses in Germany.",
               "More_Info": "Analyzed economic and logistic concepts for freight transport in Germany. Conducted reporting and sampling of geographic and network information for exploratory research in logistics and urban development. Evaluated novel solutions for urban freight in districts across Berlin."
             },
             "id": "ddc83d4ad7bf0f03c884c944bca8e791"
