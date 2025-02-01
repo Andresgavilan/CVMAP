@@ -1,0 +1,77 @@
+#eef91a
+#fb9332
+#f07c42
+#d24b60
+
+
+
+
+
+
+      /* 🖥️ Desktop-Specific Styling */
+      @media (min-width: 1024px) {
+        .mapboxgl-popup-content {
+          width: 350px; /* Slightly larger for desktops */
+          padding: 25px;
+          font-size: 18px;
+        }
+      }
+
+      /* 📱 Tablet & Small Screens (Portrait Mode) */
+      @media (max-width: 1023px) {
+        .mapboxgl-popup-content {
+          width: 85%; /* Expands for better viewing */
+          min-height: auto;
+          font-size: 15px;
+          padding: 18px;
+        }
+
+        .mapboxgl-popup-content h3 {
+          font-size: 18px;
+        }
+        .mapboxgl-popup-content button {
+          font-size: 16px;
+          padding: 12px;
+        }
+
+      }
+
+      /* 📲 Mobile (Phones < 768px) */
+      @media (max-width: 767px) {
+        .mapboxgl-popup-content {
+          width: 95%; /* Nearly full-screen */
+          font-size: 14px;
+          padding: 15px;
+          min-height: auto;
+        }
+
+        .mapboxgl-popup-content h3 {
+          font-size: 16px;
+          padding: 12px;
+        }
+
+        .mapboxgl-popup-content button {
+          font-size: 15px;
+          padding: 10px;
+          width: 100%; /* Ensures easy tap */
+        }
+      }
+
+      /* 🎯 Extra Small Devices (Phones < 480px) */
+      @media (max-width: 480px) {
+        .mapboxgl-popup-content {
+          width: 98%;
+          font-size: 13px;
+          padding: 12px;
+        }
+
+        .mapboxgl-popup-content h3 {
+          font-size: 15px;
+          padding: 10px;
+        }
+
+        .mapboxgl-popup-content button {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
