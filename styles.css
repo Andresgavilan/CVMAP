@@ -1,0 +1,375 @@
+
+/*<style> */
+
+body {
+  color: #404040;
+  font:
+    400 15px/22px 'Source Sans Pro',
+    'Helvetica Neue',
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  /* display: flex;
+  flex-direction: row; /* Default row layout */
+  /* height: 100vh; */
+}
+* {
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+a {
+  color: #404040;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000000;
+}
+
+.sidebar {
+  position: fixed;
+  width: 33.3333%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  border-right: 1px solid rgba(185, 31, 31, 0.25);
+  background: #f8f8f8;
+}
+
+#map {
+  position: fixed;
+  left: 33.3333%;
+  width: 66.66666%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+
+.heading {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  min-height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  background-color: #156991;
+  color: #fff;
+}
+
+.listings {
+  height: calc(100%-60px);
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.listings .item {
+  display: block;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child {
+  border-bottom: none;
+}
+
+.listings .item .title {
+  display: block;
+  color: #156991;
+  font-weight: 700;
+}
+
+.listings .item .title small {
+  font-weight: 400;
+}
+
+.listings .item.active .title,
+.listings .item .title:hover {
+  color: #8cc63f;
+}
+
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #00853e;
+  border-radius: 0;
+}
+
+.marker {
+  border: none;
+  cursor: pointer;
+  height: 56px;
+  width: 56px;
+  background-image: url('marker.png');
+  transition: transform 0.3s;
+  background-size: cover; /* Ensure the marker fits perfectly */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation */
+}
+
+/* Marker tweaks */
+.mapboxgl-popup {
+  padding-bottom: 50px;
+  /*max-width: 300px; /* Adjust maximum popup width */
+  /* min-width: 250px; */
+}
+/*.mapboxgl-popup {
+  max-width: 300px; Adjust maximum popup width 
+  min-width: 250px;
+} */
+
+.mapboxgl-popup-close-button {
+  display: block; /* Restore close button */
+  background: transparent;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.mapboxgl-popup-content {
+    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+    width: 180px; /* 300px standard 400px Full-width popups on smaller screens */
+    /* max-width: 300px; /* Ensures it doesn't overflow */
+    /*min-height: 220px; /* Keeps content balanced */
+    /*background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);*/
+    padding: 0;
+    /*font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    transition: all 0.3s ease-in-out;
+    overflow-wrap: break-word;*/
+    }
+
+.mapboxgl-popup-content h3 {
+  /*font-size: 20px; /* Larger header */
+  /* text-align: center;*/
+  background: #00853e;
+  color: white;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  margin: 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.mapboxgl-popup-content div {
+  padding: 10px;
+  /*font-size: 14px; /* Ensure consistent sizing */
+  /*line-height: 1.5; /* Improve readability */
+  /*color: #333; /* Softer text color */
+}
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+  border-bottom-color: #91c949;
+}
+
+/*.mapboxgl-popup-content p {
+  font-size: 16px;
+}
+
+.mapboxgl-popup-content img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}*/
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width for smaller screens */
+    height: 40%; /* Adjust height dynamically */
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    /*flex: 1; /* Allow sidebar to grow/shrink */
+    /*min-height: 50%; /* Minimum height on mobile */
+    }
+  #map {
+    left: 0; /* Full-width map on mobile */
+    width: 100%; /* Full-width map */
+    top: 40%; /* Push map below the sidebar */
+    height: 60%; /* Adjust height for visibility */
+  }
+  .heading{
+    min-height: 50px;
+    line-height: 50px;
+  }
+
+  h1 {
+    font-size: 18px;
+    padding: 15px 2px;
+  }
+
+  .listings {
+    padding-bottom: 50px;
+  }
+
+  .listings .item {
+    padding: 8px;
+  }
+
+  .listings .item .title {
+    font-size: 14px;
+  }
+
+  .listings .item .title small {
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .sidebar {
+    /*width: 100%; /* Full width for smaller screens */
+    height: 50%; /* Adjust height dynamically */
+    /*position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    /*flex: 1; /* Allow sidebar to grow/shrink */
+    /*min-height: 50%; /* Minimum height on mobile */
+    }
+
+  #map {
+    /*left: 0; /* Full-width map on mobile */
+    /*width: 100%; /* Full-width map */
+    top: 50%; /* Push map below the sidebar */
+    height: 50%; /* Adjust height for visibility */
+  }
+  .heading{
+    min-height: 40px;
+    line-height: 40px;
+  }
+
+  h1 {
+    font-size: 16px;
+    padding: 10px 2px;
+  }
+
+  .listings {
+    padding-bottom: 40px;
+  }
+
+  .listings .item {
+    padding: 6px;
+  }
+
+  .listings .item .title {
+    font-size: 12px;
+  }
+
+  .listings .item .title small {
+    font-size: 10px;
+  }
+}
+
+/* Hide the default scrollbar and style the sidebar scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/*.sidebar::-webkit-scrollbar-thumb {
+  background: #aaa; /* Custom scrollbar color */
+  /*border-radius: 10px;*/
+/* }*/
+
+/* Default styles for larger screens */
+/*.mapboxgl-popup-content {
+  width: 300px;
+  max-width: 90%;
+  background: #fff;
+  padding: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: break-word; /* Ensures long text wraps */
+/*}*/
+
+/* For smaller screens (tablets and mobile phones) */
+/*@media (max-width: 767px) {
+  .mapboxgl-popup-content {
+    width: 90%; /* Take more horizontal space */
+    /*max-width: none;
+    padding: 15px;
+    font-size: 14px; /* Adjust text size */
+    /*overflow-wrap: break-word; /* Ensures long text wraps */
+/*}*/
+ /* }*/
+
+  /*.mapboxgl-popup-content h3 {
+    font-size: 16px; /* Adjust heading size */
+    /*text-align: center; /* Center align for better readability */
+ /* }*/
+
+  /*.mapboxgl-popup-content div {
+    font-size: 14px; /* Body text size */
+    /*overflow-wrap: break-word; /* Ensures long text wraps */
+/*}*/
+ 
+
+
+/* For very small screens (phones < 480px) */
+/*@media (max-width: 480px) {
+  .mapboxgl-popup-content {
+    width: 95%; /* Almost full width */
+    /*padding: 10px;
+    /*font-size: 13px; /* Smaller text */
+   /* overflow-wrap: break-word; /* Ensures long text wraps */
+/*  }*/
+
+/*@media (min-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static; /* Allow scrolling on small screens */
+  /*  overflow-wrap: break-word; /* Ensures long text wraps */
+/*}*/
+  /*}*/
+
+  /*.mapboxgl-popup-content {
+    margin: 0 auto; /* Center horizontally */
+    /*left: 0;
+    right: 0;
+    position: relative; /* Prevent clipping */
+  /*}*/
+
+  /*.map {
+    width: 100%;
+    height: calc(100%-200px); /* Adjust height to accommodate the sidebar */
+    /*flex: 2; /* Allow map to grow more */
+  /*}*/
+
+
+/*}*/
+/*</style> */
