@@ -61,6 +61,21 @@ function addMarkersAndListings(geojson) {
 });
 }
 
+function formatDescription(description) {
+    // Split the description into sentences based on periods
+    const sentences = description.split('. ');
+
+    // Format each sentence with a bullet point and a period
+    const formattedSentences = sentences.map(sentence => {
+        if (sentence.trim() !== '') {
+            return `<li>${sentence.trim()}.</li>`;
+        }
+    }).join('');
+
+    return `<ul>${formattedSentences}</ul>`;
+}
+
+
 // Add a marker to the map
 function addMarker(feature) {
     // Create a div element for the custom marker
@@ -81,6 +96,35 @@ function addMarker(feature) {
         `<h3>${feature.properties.Title}</h3>
          <p>${feature.properties.Description}</p>`
     );
+    marker.setPopup(popup);
+
+    return marker;
+}
+
+function addMarkerAndPopup(feature) {
+    // Create a marker using the custom element
+    // Create a div element for the custom marker
+    const el = document.createElement('div');
+    el.className = 'marker'; // Add a class for styling (optional)
+    el.style.backgroundImage = `url('marker.png')`; // Path to your custom marker image
+    el.style.width = '30px'; // Set the width of the marker
+    el.style.height = '30px'; // Set the height of the marker
+    el.style.backgroundSize = 'cover'; // Ensure the image covers the div
+
+    // Create a marker using the custom element
+    const marker = new mapboxgl.Marker(el)
+        .setLngLat(feature.geometry.coordinates)
+        .addTo(map);
+
+    // Format the description
+    const formattedDescription = formatDescription(feature.properties.Description);
+
+    // Create and attach a popup to the marker
+    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h3>${feature.properties.Title}</h3>
+         ${formattedDescription}`
+    );
+
     marker.setPopup(popup);
 
     return marker;

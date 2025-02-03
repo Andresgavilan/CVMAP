@@ -139,7 +139,7 @@ a:hover {
 
 .mapboxgl-popup-close-button {
   display: block; /* Restore close button */
-  background: transparent;
+  background: white;
   color: #333;
   font-size: 16px;
   cursor: pointer;
@@ -150,7 +150,7 @@ a:hover {
 
 .mapboxgl-popup-content {
     font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
-    width: 180px; /* 300px standard 400px Full-width popups on smaller screens */
+    width: 380px; /* 300px standard 400px Full-width popups on smaller screens */
     /* max-width: 300px; /* Ensures it doesn't overflow */
     /*min-height: 220px; /* Keeps content balanced */
     /*background: #ffffff;
@@ -166,15 +166,15 @@ a:hover {
     }
 
 .mapboxgl-popup-content h3 {
-  /*font-size: 20px; /* Larger header */
-  /* text-align: center;*/
-  background: #00853e;
+  font-size: 20px; /* Larger header */
+  text-align: center;
+  background: #578500;
   color: white;
   padding: 10px;
-  border-radius: 3px 3px 0 0;
+  border-radius: 0px 0px 0 0;
   margin: 0;
   font-weight: 700;
-  margin-top: -15px;
+  margin-top: 2px;
 }
 .mapboxgl-popup-content h4 {
   margin: 0;
@@ -195,6 +195,15 @@ a:hover {
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
   border-bottom-color: #91c949;
 }
+.mapboxgl-popup-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.mapboxgl-popup-content li {
+  margin-bottom: 5px;
+}
+
 
 /*.mapboxgl-popup-content p {
   font-size: 16px;
