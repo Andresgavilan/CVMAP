@@ -33,6 +33,7 @@ a:hover {
   color: #000000;
 }
 
+/* Default styles for desktop */
 .sidebar {
   position: fixed;
   width: 33.3333%;
@@ -52,6 +53,44 @@ a:hover {
   top: 0;
   bottom: 0;
 }
+
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu {
+  display: block;
+  padding: 10px;
+  background: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu ul li {
+  padding: 10px 0;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.menu ul li a:hover {
+  text-decoration: underline;
+}
+
 
 .heading {
   background: #fff;
@@ -132,14 +171,10 @@ a:hover {
   /*max-width: 300px; /* Adjust maximum popup width */
   /* min-width: 250px; */
 }
-/*.mapboxgl-popup {
-  max-width: 300px; Adjust maximum popup width 
-  min-width: 250px;
-} */
 
 .mapboxgl-popup-close-button {
   display: block; /* Restore close button */
-  background: white;
+  background: rgba(255, 251, 7, 0.884);
   color: #333;
   font-size: 16px;
   cursor: pointer;
@@ -204,17 +239,6 @@ a:hover {
   margin-bottom: 5px;
 }
 
-
-/*.mapboxgl-popup-content p {
-  font-size: 16px;
-}
-
-.mapboxgl-popup-content img {
-  width: 100%;
-  border-radius: 8px;
-  margin-top: 10px;
-}*/
-
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .sidebar {
@@ -223,14 +247,16 @@ a:hover {
     position: relative;
     border-right: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    overflow-y: scroll;
     /*flex: 1; /* Allow sidebar to grow/shrink */
     /*min-height: 50%; /* Minimum height on mobile */
     }
   #map {
     left: 0; /* Full-width map on mobile */
     width: 100%; /* Full-width map */
-    top: 40%; /* Push map below the sidebar */
+    top: 0; /* Push map below the sidebar */
     height: 60%; /* Adjust height for visibility */
+    position: relative;
   }
   .heading{
     min-height: 50px;
@@ -308,77 +334,3 @@ a:hover {
 .sidebar::-webkit-scrollbar {
   width: 6px;
 }
-
-/*.sidebar::-webkit-scrollbar-thumb {
-  background: #aaa; /* Custom scrollbar color */
-  /*border-radius: 10px;*/
-/* }*/
-
-/* Default styles for larger screens */
-/*.mapboxgl-popup-content {
-  width: 300px;
-  max-width: 90%;
-  background: #fff;
-  padding: 20px;
-  font-size: 16px;
-  line-height: 1.5;
-  overflow-wrap: break-word; /* Ensures long text wraps */
-/*}*/
-
-/* For smaller screens (tablets and mobile phones) */
-/*@media (max-width: 767px) {
-  .mapboxgl-popup-content {
-    width: 90%; /* Take more horizontal space */
-    /*max-width: none;
-    padding: 15px;
-    font-size: 14px; /* Adjust text size */
-    /*overflow-wrap: break-word; /* Ensures long text wraps */
-/*}*/
- /* }*/
-
-  /*.mapboxgl-popup-content h3 {
-    font-size: 16px; /* Adjust heading size */
-    /*text-align: center; /* Center align for better readability */
- /* }*/
-
-  /*.mapboxgl-popup-content div {
-    font-size: 14px; /* Body text size */
-    /*overflow-wrap: break-word; /* Ensures long text wraps */
-/*}*/
- 
-
-
-/* For very small screens (phones < 480px) */
-/*@media (max-width: 480px) {
-  .mapboxgl-popup-content {
-    width: 95%; /* Almost full width */
-    /*padding: 10px;
-    /*font-size: 13px; /* Smaller text */
-   /* overflow-wrap: break-word; /* Ensures long text wraps */
-/*  }*/
-
-/*@media (min-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: static; /* Allow scrolling on small screens */
-  /*  overflow-wrap: break-word; /* Ensures long text wraps */
-/*}*/
-  /*}*/
-
-  /*.mapboxgl-popup-content {
-    margin: 0 auto; /* Center horizontally */
-    /*left: 0;
-    right: 0;
-    position: relative; /* Prevent clipping */
-  /*}*/
-
-  /*.map {
-    width: 100%;
-    height: calc(100%-200px); /* Adjust height to accommodate the sidebar */
-    /*flex: 2; /* Allow map to grow more */
-  /*}*/
-
-
-/*}*/
-/*</style> */

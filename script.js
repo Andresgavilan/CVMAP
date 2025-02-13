@@ -1,5 +1,6 @@
 // script.js
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVzZ2F2aWxhbiIsImEiOiJja2wyd2Z3dXcwZDE3MnVwMTlhcnNieDhxIn0.f_iLJPAJJUyEXEkm7itrZw'; // Replace with your Mapbox access token
+document.addEventListener('DOMContentLoaded', () => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVzZ2F2aWxhbiIsImEiOiJja2wyd2Z3dXcwZDE3MnVwMTlhcnNieDhxIn0.f_iLJPAJJUyEXEkm7itrZw'; // Replace with your Mapbox access token
 
 // Initialize the map
 const map = new mapboxgl.Map({
@@ -54,11 +55,11 @@ function addMarkersAndListings(geojson) {
 
         // Add click event to listing
         listing.addEventListener('click', () => {
-        flyToStore(feature);
-        marker.togglePopup();
-        highlightListing(listing);
+            flyToStore(feature);
+            marker.togglePopup();
+            highlightListing(listing);
+        });
     });
-});
 }
 
 function formatDescription(description) {
@@ -101,34 +102,34 @@ function addMarker(feature) {
     return marker;
 }
 
-function addMarkerAndPopup(feature) {
+// function addMarkerAndPopup(feature) {
     // Create a marker using the custom element
     // Create a div element for the custom marker
-    const el = document.createElement('div');
-    el.className = 'marker'; // Add a class for styling (optional)
-    el.style.backgroundImage = `url('marker.png')`; // Path to your custom marker image
-    el.style.width = '30px'; // Set the width of the marker
-    el.style.height = '30px'; // Set the height of the marker
-    el.style.backgroundSize = 'cover'; // Ensure the image covers the div
+   // const el = document.createElement('div');
+   // el.className = 'marker'; // Add a class for styling (optional)
+    //el.style.backgroundImage = `url('marker.png')`; // Path to your custom marker image
+    //el.style.width = '30px'; // Set the width of the marker
+    //el.style.height = '30px'; // Set the height of the marker
+    //el.style.backgroundSize = 'cover'; // Ensure the image covers the div
 
     // Create a marker using the custom element
-    const marker = new mapboxgl.Marker(el)
-        .setLngLat(feature.geometry.coordinates)
-        .addTo(map);
+    //const marker = new mapboxgl.Marker(el)
+      //  .setLngLat(feature.geometry.coordinates)
+        //.addTo(map);
 
     // Format the description
-    const formattedDescription = formatDescription(feature.properties.Description);
+    //const formattedDescription = formatDescription(feature.properties.Description);
 
     // Create and attach a popup to the marker
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-        `<h3>${feature.properties.Title}</h3>
-         ${formattedDescription}`
-    );
+    //const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      //  `<h3>${feature.properties.Title}</h3>
+        // ${formattedDescription}`
+    //);
 
-    marker.setPopup(popup);
+    //marker.setPopup(popup);
 
-    return marker;
-}
+    //return marker;
+//}
 
 // Create a listing for the sidebar
 function createListing(feature) {
@@ -186,3 +187,12 @@ function setupMapInteractions(geojson) {
 
 // Initialize the map and load data
 initializeMap();
+
+// Menu toggle functionality
+const menuToggle = document.getElementById('menu-toggle');
+const menu = document.getElementById('menu');
+
+menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    });
+});
