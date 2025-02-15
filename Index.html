@@ -1,28 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Andres Gavilan</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
-    <link rel="stylesheet" href="docs/assets/css/styles.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <title>Andres Gavilan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="docs/assets/css/styles.css" />
+</head>
 
-  <body>
-    <div id="map" class="map"></div>
-    <button id="toggle-listings" class="floating-button">Learn More</button>
-    <div id="listings" class="listings"></div>
-    <script src="script.js"></script>
-    <div class="sidebar">
-      <button id="menu-toggle" class="menu-toggle">☰ Menu</button>
-      <div class="menu" id="menu">
-        <ul>
-          <li><a href="#" id="relevant-experience">Relevant Experience</a></li>
-          <li><a href="https://www.researchgate.net/profile/Andres-Gavilan-2?ev=hdr_xprf" target="_blank">Publications</a></li>
-          <li><a href="https://www.linkedin.com/in/andres-gavilan/" target="_blank">Let's Connect</a></li>
-          <li><a href="https://music.apple.com/profile/pipegavilan" target="_blank">Listening</a></li>
-        </ul>
-      </div>
-  </body>
+<body>
+  <div id="map" class="map"></div>
+  <div class="floating-buttons">
+    <button id="toggle-listings" class="floating-button">Experience</button>
+    <button id="publications" class="floating-button">Publications</button>
+    <button id="linkedin" class="floating-button">LinkedIn</button>
+    <button id="listening" class="floating-button">Listening</button>
+  </div>
+  <div id="listings" class="listings"></div>
+  <script src="script.js"></script>
+  </div>
+</body>
 </html>

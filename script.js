@@ -153,7 +153,7 @@ function buildLocationList(trabajos) {
 function flyToStore(currentFeature) {
   map.flyTo({
     center: currentFeature.geometry.coordinates,
-    zoom: 15
+    zoom: 12
   });
 }
 
@@ -178,4 +178,16 @@ const listing = document.getElementById('listing');
 toggleButton.addEventListener('click', () => {
   listings.classList.toggle('open');
   toggleButton.style.display = listing.classList.contains('open') ? 'none' : 'block';
+});
+// Add event listeners to open links in a new window
+document.getElementById('publications').addEventListener('click', () => {
+  window.open('https://www.researchgate.net/profile/Andres-Gavilan-2?ev=hdr_xprf', '_blank');
+});
+
+document.getElementById('linkedin').addEventListener('click', () => {
+  window.open('https://www.linkedin.com/in/andres-gavilan/', '_blank');
+});
+
+document.getElementById('listening').addEventListener('click', () => {
+  window.open('https://music.apple.com/profile/pipegavilan', '_blank');
 });
