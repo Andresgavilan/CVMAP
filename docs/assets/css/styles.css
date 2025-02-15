@@ -1,5 +1,41 @@
+.map {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
 
-/*<style> */
+.floating-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffee00;
+  color: rgb(8, 14, 105);
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 150px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.listings {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  background-color: white;
+  overflow-y: auto;
+  box-shadow: -2px 0 5px rgba(170, 65, 65, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.listings.open {
+  transform: translateX(0);
+}
 
 body {
   color: #404040;
@@ -30,7 +66,7 @@ a {
 }
 
 a:hover {
-  color: #000000;
+  color: #db1616;
 }
 
 /* Default styles for desktop */
@@ -43,15 +79,6 @@ a:hover {
   overflow: auto;
   border-right: 1px solid rgba(185, 31, 31, 0.25);
   background: #f8f8f8;
-}
-
-#map {
-  position: fixed;
-  left: 33.3333%;
-  width: 66.66666%;
-  height: 100%;
-  top: 0;
-  bottom: 0;
 }
 
 .menu-toggle {
@@ -184,7 +211,7 @@ a:hover {
 }
 
 .mapboxgl-popup-content {
-    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+    font: 300 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
     width: 380px; /* 300px standard 400px Full-width popups on smaller screens */
     /* max-width: 300px; /* Ensures it doesn't overflow */
     /*min-height: 220px; /* Keeps content balanced */
@@ -203,13 +230,13 @@ a:hover {
 .mapboxgl-popup-content h3 {
   font-size: 20px; /* Larger header */
   text-align: center;
-  background: #578500;
+  background: #87c21a;
   color: white;
-  padding: 10px;
+  padding: 5px;
   border-radius: 0px 0px 0 0;
   margin: 0;
-  font-weight: 700;
-  margin-top: 2px;
+  font-weight: 500;
+  margin-top: 0px;
 }
 .mapboxgl-popup-content h4 {
   margin: 0;
@@ -225,6 +252,7 @@ a:hover {
 }
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
   margin-top: 15px;
+  font-size: 12px;
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
@@ -242,11 +270,11 @@ a:hover {
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%; /* Full width for smaller screens */
-    height: 40%; /* Adjust height dynamically */
+    width: 10%; /* Full width for smaller screens */
+    height: 10%; /* Adjust height dynamically */
     position: relative;
     border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(179, 22, 22, 0.25);
     overflow-y: scroll;
     /*flex: 1; /* Allow sidebar to grow/shrink */
     /*min-height: 50%; /* Minimum height on mobile */
@@ -255,12 +283,17 @@ a:hover {
     left: 0; /* Full-width map on mobile */
     width: 100%; /* Full-width map */
     top: 0; /* Push map below the sidebar */
-    height: 60%; /* Adjust height for visibility */
-    position: relative;
+    height: 100%; /* Adjust height for visibility */
+    position: absolute;
+  }
+
+  .floating-button {
+    padding: 10px 20px; /* Make the button bigger */
+    font-size: 20px; /* Adjust font size for smaller screens */
   }
   .heading{
-    min-height: 50px;
-    line-height: 50px;
+    min-height: 0px;
+    line-height: 0px;
   }
 
   h1 {
@@ -283,6 +316,23 @@ a:hover {
   .listings .item .title small {
     font-size: 12px;
   }
+
+  .mapboxgl-popup-content {
+    font: 300 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+    width: 280px; /* 300px standard 400px Full-width popups on smaller screens */
+    /* max-width: 300px; /* Ensures it doesn't overflow */
+    /*min-height: 220px; /* Keeps content balanced */
+    /*background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);*/
+    padding: 0;
+    /*font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    transition: all 0.3s ease-in-out;
+    overflow-wrap: break-word;*/
+    }
 }
 
 
@@ -300,12 +350,17 @@ a:hover {
   #map {
     /*left: 0; /* Full-width map on mobile */
     /*width: 100%; /* Full-width map */
-    top: 50%; /* Push map below the sidebar */
-    height: 50%; /* Adjust height for visibility */
+    top: 0%; /* Push map below the sidebar */
+    height: 500px; /* Adjust height for visibility */
   }
+  .floating-button {
+      padding: 12px 24px; /* Adjust padding for smaller screens */
+      font-size: 14px; /* Adjust font size for smaller screens */
+  }
+  
   .heading{
-    min-height: 40px;
-    line-height: 40px;
+    min-height: 0px;
+    line-height: 0px;
   }
 
   h1 {
@@ -328,9 +383,8 @@ a:hover {
   .listings .item .title small {
     font-size: 10px;
   }
-}
 
 /* Hide the default scrollbar and style the sidebar scrollbar */
 .sidebar::-webkit-scrollbar {
-  width: 6px;
-}
+  width: 5px;
+}}

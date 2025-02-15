@@ -1,198 +1,181 @@
-// script.js
-document.addEventListener('DOMContentLoaded', () => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVzZ2F2aWxhbiIsImEiOiJja2wyd2Z3dXcwZDE3MnVwMTlhcnNieDhxIn0.f_iLJPAJJUyEXEkm7itrZw'; // Replace with your Mapbox access token
-
-// Initialize the map
+mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kcmVzZ2F2aWxhbiIsImEiOiJja2wyd2Z3dXcwZDE3MnVwMTlhcnNieDhxIn0.f_iLJPAJJUyEXEkm7itrZw';
+/**
+ * Add the map to the page
+ */
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/andresgavilan/cm6h3b8x6002d01sderoi6une',
-    center: [-35.221901, 27.616228], // Default center
-    zoom: 2.5,
+  container: 'map',
+  style: 'mapbox://styles/andresgavilan/cm6h3b8x6002d01sderoi6une',
+  center: [-35.221901, 27.616228],
+  zoom: 2.5,
+  scrollZoom: true
 });
 
-// Fetch GeoJSON data
-async function loadGeoJSON() {
-    const response = await fetch('CVMAP.geojson');
-    const data = await response.json();
-    return data;
-
-}
-
-// Add markers and populate listings
-async function initializeMap() {
-    try {
-        const geojson = await loadGeoJSON();
-
-        // Add markers and listings
-        addMarkersAndListings(geojson);
-
-        // Initialize map interactions
-        setupMapInteractions(geojson);
-    } catch (error) {
-        console.error('Error initializing map:', error);
-    }
-}
-
-// Add markers to the map and listings to the sidebar
-function addMarkersAndListings(geojson) {
-    const listings = document.getElementById('listings');
-
-    // Sort features by date (newest first)
-    geojson.features.sort((a, b) => {
-        const dateA = new Date(a.properties.Date);
-        const dateB = new Date(b.properties.Date);
-        return dateB - dateA;
+// Fetch the GeoJSON data from the server
+fetch('Dataprocess/CVMAP.geojson')
+  .then(response => response.json())
+  .then(trabajos => {
+    // Sort the features array by Date in descending order
+    trabajos.features.sort((a, b) => parseInt(b.properties.Date) - parseInt(a.properties.Date));
+    /**
+     * Assign a unique id to each store. You'll use this `id`
+     * later to associate each point on the map with a listing
+     * in the sidebar.
+     */
+    trabajos.features.forEach((trabajo, i) => {
+      trabajo.properties.id = i;
     });
 
-    geojson.features.forEach((feature) => {
+    /**
+     * Wait until the map loads to make changes to the map.
+     */
+    map.on('load', () => {
+      /**
+       * This is where your '.addLayer()' used to be, instead
+       * add only the source without styling a layer
+       */
+      map.addSource('places', {
+        "type": 'geojson',
+        "data": trabajos
+      });
 
-        // Add marker to the map
-        const marker = addMarker(feature);
-
-        // Add listing to the sidebar
-        const listing = createListing(feature);
-        listings.appendChild(listing);
-
-        // Add click event to listing
-        listing.addEventListener('click', () => {
-            flyToStore(feature);
-            marker.togglePopup();
-            highlightListing(listing);
-        });
+      /**
+       * Add all the things to the page:
+       * - The location listings on the side of the page
+       * - The markers onto the map
+       */
+      buildLocationList(trabajos);
+      addMarkers(trabajos);
     });
-}
+  })
+  .catch(error => console.error('Error loading GeoJSON data:', error));
 
-function formatDescription(description) {
-    // Split the description into sentences based on periods
-    const sentences = description.split('. ');
-
-    // Format each sentence with a bullet point and a period
-    const formattedSentences = sentences.map(sentence => {
-        if (sentence.trim() !== '') {
-            return `<li>${sentence.trim()}.</li>`;
-        }
-    }).join('');
-
-    return `<ul>${formattedSentences}</ul>`;
-}
-
-
-// Add a marker to the map
-function addMarker(feature) {
-    // Create a div element for the custom marker
+function addMarkers(trabajos) {
+  /* For each feature in the GeoJSON object above: */
+  for (const marker of trabajos.features) {
+    /* Create a div element for the marker. */
     const el = document.createElement('div');
-    el.className = 'marker'; // Add a class for styling (optional)
-    el.style.backgroundImage = `url('marker.png')`; // Path to your custom marker image
-    el.style.width = '30px'; // Set the width of the marker
-    el.style.height = '30px'; // Set the height of the marker
-    el.style.backgroundSize = 'cover'; // Ensure the image covers the div
+    /* Assign a unique `id` to the marker. */
+    el.id = `marker-${marker.properties.id}`;
+    /* Assign the `marker` class to each marker for styling. */
+    el.className = 'marker';
 
-    // Create a marker using the custom element
-    const marker = new mapboxgl.Marker(el)
-        .setLngLat(feature.geometry.coordinates)
-        .addTo(map);
-
-    // Create and attach a popup to the marker
-    const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-        `<h3>${feature.properties.Title}</h3>
-         <p>${feature.properties.Description}</p>`
-    );
-    marker.setPopup(popup);
-
-    return marker;
-}
-
-// function addMarkerAndPopup(feature) {
-    // Create a marker using the custom element
-    // Create a div element for the custom marker
-   // const el = document.createElement('div');
-   // el.className = 'marker'; // Add a class for styling (optional)
-    //el.style.backgroundImage = `url('marker.png')`; // Path to your custom marker image
-    //el.style.width = '30px'; // Set the width of the marker
-    //el.style.height = '30px'; // Set the height of the marker
-    //el.style.backgroundSize = 'cover'; // Ensure the image covers the div
-
-    // Create a marker using the custom element
-    //const marker = new mapboxgl.Marker(el)
-      //  .setLngLat(feature.geometry.coordinates)
-        //.addTo(map);
-
-    // Format the description
-    //const formattedDescription = formatDescription(feature.properties.Description);
-
-    // Create and attach a popup to the marker
-    //const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-      //  `<h3>${feature.properties.Title}</h3>
-        // ${formattedDescription}`
-    //);
-
-    //marker.setPopup(popup);
-
-    //return marker;
-//}
-
-// Create a listing for the sidebar
-function createListing(feature) {
-    const item = document.createElement('div');
-    item.className = 'item';
-    item.id = `listing-${feature.properties.id}`;
-    item.innerHTML = `
-        <div class="title">${feature.properties.Title}</div>
-        <small>${feature.properties.City}</small>
-        <small>${feature.properties.Date}</small>
-    `;
-    return item;
-}
-
-// Fly to the store location
-function flyToStore(feature) {
-    map.flyTo({
-        center: feature.geometry.coordinates,
-        zoom: 15
-    });
-}
-
-// Highlight the active listing
-function highlightListing(activeListing) {
-    const activeItem = document.getElementsByClassName('active');
-    if (activeItem[0]) {
+    /**
+     * Create a marker using the div element
+     * defined above and add it to the map.
+     **/
+    new mapboxgl.Marker(el, { offset: [0, -23] })
+      .setLngLat(marker.geometry.coordinates)
+      .addTo(map);
+    /**
+     * Listen to the element and when it is clicked, do three things:
+     * 1. Fly to the point
+     * 2. Close all other popups and display popup for clicked store
+     * 3. Highlight listing in sidebar (and remove highlight for all other listings)
+     **/
+    el.addEventListener('click', (e) => {
+      /* Fly to the point */
+      flyToStore(marker);
+      /* Close all other popups and display popup for clicked store */
+      createPopUp(marker);
+      /* Highlight listing in sidebar */
+      const activeItem = document.getElementsByClassName('active');
+      e.stopPropagation();
+      if (activeItem[0]) {
         activeItem[0].classList.remove('active');
-    }
-    activeListing.classList.add('active');
+      }
+      const listing = document.getElementById(
+        `listing-${marker.properties.id}`
+      );
+      listing.classList.add('active');
+      listings.classList.remove('open');
+      toggleButton.style.display = 'block';
+    });
+  }
 }
-
-// Setup map interactions
-function setupMapInteractions(geojson) {
+/**
+ * Add a listing for each store to the sidebar.
+ **/
+function buildLocationList(trabajos) {
+  for (const trabajo of trabajos.features) {
+    /* Add a new listing section to the sidebar. */
     const listings = document.getElementById('listings');
+    const listing = listings.appendChild(document.createElement('div'));
+    /* Assign a unique `id` to the listing. */
+    listing.id = `listing-${trabajo.properties.id}`;
+    /* Assign the `item` class to each listing for styling. */
+    listing.className = 'item';
 
-    // Sync map with scroll position
-    listings.addEventListener('scroll', () => {
-        const scrollTop = listings.scrollTop;
-        const scrollHeight = listings.scrollHeight;
-        const clientHeight = listings.clientHeight;
+    /* Add the link to the individual listing created above. */
+    const link = listing.appendChild(document.createElement('a'));
+    link.href = '#';
+    link.className = 'title';
+    link.id = `link-${trabajo.properties.id}`;
+    link.innerHTML = `${trabajo.properties.Title}`;
 
-        // Calculate the visible area and adjust map accordingly
-        const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
-        const featureIndex = Math.floor(geojson.features.length * scrollPercentage);
-        const feature = geojson.features[featureIndex];
+    /* Add details to the individual listing. */
+    const details = listing.appendChild(document.createElement('div'));
+    details.innerHTML = `${trabajo.properties.Where}`;
+    if (trabajo.properties.Subtitle) {
+      details.innerHTML += ` &middot; ${trabajo.properties.City}`;
+      details.innerHTML += ` &middot; ${trabajo.properties.Date}`;
+    }
 
-        if (feature) {
-            map.flyTo({
-                center: feature.geometry.coordinates,
-                zoom: 14
-            });
+    /**
+     * Listen to the element and when it is clicked, do four things:
+     * 1. Update the `currentFeature` to the store associated with the clicked link
+     * 2. Fly to the point
+     * 3. Close all other popups and display popup for clicked store
+     * 4. Highlight listing in sidebar (and remove highlight for all other listings)
+     **/
+    link.addEventListener('click', function () {
+      for (const feature of trabajos.features) {
+        if (this.id === `link-${feature.properties.id}`) {
+          flyToStore(feature);
+          createPopUp(feature);
         }
+      }
+      const activeItem = document.getElementsByClassName('active');
+      if (activeItem[0]) {
+        activeItem[0].classList.remove('active');
+      }
+      this.parentNode.classList.add('active');
+      // Hide the listings container
+      listings.classList.remove('open');
+      toggleButton.style.display = 'block';
     });
+  }
 }
 
-// Initialize the map and load data
-initializeMap();
+/**
+ * Use Mapbox GL JS's `flyTo` to move the camera smoothly
+ * a given center point.
+ **/
+function flyToStore(currentFeature) {
+  map.flyTo({
+    center: currentFeature.geometry.coordinates,
+    zoom: 15
+  });
+}
 
-// Menu toggle functionality
-const menuToggle = document.getElementById('menu-toggle');
-const menu = document.getElementById('menu');
+/**
+ * Create a Mapbox GL JS `Popup`.
+ **/
+function createPopUp(currentFeature) {
+  const popUps = document.getElementsByClassName('mapboxgl-popup');
+  if (popUps[0]) popUps[0].remove();
+  const popup = new mapboxgl.Popup({ closeOnClick: false })
+    .setLngLat(currentFeature.geometry.coordinates)
+    .setHTML(
+      `<h3>Descrption</h3><h4><Strong>${currentFeature.properties.Where}</Strong></h4>
+      <ul>${currentFeature.properties.Description.split('. ').map(sentence => `<li>${sentence}</li>`).join('')}</ul>`
+    )
+    .addTo(map);
+}
 
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show');
-    });
+const toggleButton = document.getElementById('toggle-listings');
+const listing = document.getElementById('listing');
+
+toggleButton.addEventListener('click', () => {
+  listings.classList.toggle('open');
+  toggleButton.style.display = listing.classList.contains('open') ? 'none' : 'block';
 });
