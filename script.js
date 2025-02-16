@@ -166,7 +166,7 @@ function createPopUp(currentFeature) {
   const popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
     .setHTML(
-      `<h3><Strong>${currentFeature.properties.Where}</Strong></h3>
+      `<h3><Strong><a href="${currentFeature.properties.URL}" target="_blank">${currentFeature.properties.Where}</a></Strong></h3>
       <ul>${currentFeature.properties.Description.split('. ').map(sentence => `<li>${sentence}</li>`).join('')}</ul>`
     )
     .addTo(map);
@@ -190,4 +190,14 @@ document.getElementById('linkedin').addEventListener('click', () => {
 
 document.getElementById('listening').addEventListener('click', () => {
   window.open('https://music.apple.com/profile/pipegavilan', '_blank');
+});
+
+// Hide the floating popup when any floating button is clicked
+const floatingButtons = document.querySelectorAll('.floating-button');
+const floatingPopup = document.getElementById('floating-popup');
+
+floatingButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    floatingPopup.style.display = 'none';
+  });
 });

@@ -18,6 +18,24 @@
   left: 0;
 }
 
+.floating-popup {
+  position: fixed;
+  top: 10px;
+  right: 50px;
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.floating-popup p {
+  margin: 0;
+  font-size: 14px;
+}
+
 
 /* Floating Buttons */
 .floating-buttons {
@@ -251,13 +269,24 @@ a:hover {
 .mapboxgl-popup-content h3 {
   font-size: 20px; /* Larger header */
   text-align: center;
-  background: #ffffff;
+  background: #ffffff86;
   color: #225495;
   padding: 5px;
   border-radius: 0px 0px 0 0;
   margin: 0;
   font-weight: 500;
   margin-top: 0px;
+}
+.mapboxgl-popup-content h3 a {
+  color: #225495; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make the link bold */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.mapboxgl-popup-content h3 a:hover {
+  color: #0056b3; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
 }
 .mapboxgl-popup-content h4 {
   margin: 0;
@@ -277,7 +306,7 @@ a:hover {
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-  border-bottom-color: #ffffff;
+  border-bottom-color: #ffffff50;
 }
 .mapboxgl-popup-content ul {
   list-style-type: disc;
