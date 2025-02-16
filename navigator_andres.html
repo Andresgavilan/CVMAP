@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Map</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+  <style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+        width: 100vw;
+    }
+    /* Finde den zoom button hässlich, deswegen deaktiviere ich ihn: */
+    .leaflet-control-zoom {
+        visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    // Initialize initial view:
+    var lat_initial = 52.509147;
+    var lon_initial = 13.343454;
+    var zoom_initial = 14;
+    var map = L.map('map').setView([lat_initial, lon_initial], zoom_initial);
+    
+    L.tileLayer('https://api.mapbox.com/styles/v1/jokrug/cllz02g5200n601pf4adp7fw2/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam9rcnVnIiwiYSI6ImNsbHl5a29sazBzY3UzcWxmdGc5ejd2NnkifQ.YvLjBAo5VeiepvC1KBYflQ', {
+        attribution: ''
+    }).addTo(map);
+
+    var userMarker = null;
+    navigator.geolocation.watchPosition(position => {
+        const { coords: { latitude, longitude }} = position;
+        if (userMarker) {
+          map.removeLayer(userMarker);
+        }
+        userMarker = new L.circle([latitude, longitude], {
+        color: '#ffffff',
+        fillColor: '#34d5eb',
+        fillOpacity: 0.5,
+        radius: 5
+        }
+        ).addTo(map);
+        summonButton.style.display = 'inline';
+    },
+    position => {console.log("Position Error")},
+    {timeout: 1, enableHighAccuracy: true, maximumAge: 0}
+    )
+  </script>
+</body>
+
+</html>

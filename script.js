@@ -201,3 +201,21 @@ floatingButtons.forEach(button => {
     floatingPopup.style.display = 'none';
   });
 });
+
+// Get the user's location and zoom to it
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(position => {
+    const userLocation = [position.coords.longitude, position.coords.latitude];
+    map.flyTo({
+      center: userLocation,
+      zoom: 12
+    });
+
+    // Add a marker for the user's location
+    new mapboxgl.Marker({ color: 'red' })
+      .setLngLat(userLocation)
+      .addTo(map);
+  });
+} else {
+  console.error('Geolocation is not supported by this browser.');
+}

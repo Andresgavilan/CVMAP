@@ -20,7 +20,7 @@
 
 .floating-popup {
   position: fixed;
-  top: 10px;
+  top: 30px;
   right: 50px;
   background-color: #f8f8f8;
   color: #333;
@@ -35,7 +35,17 @@
   margin: 0;
   font-size: 14px;
 }
+.highlight-link {
+  color: #00a389; /* Change this to your desired color */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
+.highlight-link:hover {
+  color: #f0d722; /* Change this to your desired hover color */
+  text-decoration: underline;
+}
 
 /* Floating Buttons */
 .floating-buttons {
@@ -336,7 +346,19 @@ a:hover {
     height: 1; /* Adjust height for visibility */
     position: absolute;
   }
-  
+  .floating-popup {
+    position: fixed;
+    top: 250px;
+    left: 80px;
+    right: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 10px;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+    max-width: 300px;
+  }
   .floating-buttons {
     top: 35px;
     left: 10px;
