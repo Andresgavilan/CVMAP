@@ -3,7 +3,7 @@
   top: 0;
   width: 100%;
   font-size: 10px;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   color: #333;
   text-align: center;
   padding: 5px;
@@ -31,8 +31,8 @@
 }
 
 .floating-button {
-  background-color: #ffee00;
-  color: rgb(8, 14, 105);
+  background-color: #f0d722;
+  color: #2d2f6b;
   border: none;
   padding: 10px 15px;
   border-radius: 50px;
@@ -44,7 +44,7 @@
 }
 
 .floating-button:hover {
-  background-color: #0056b3;
+  background-color: #ffe100;
   transform: scale(1.1);
 }
 
@@ -56,7 +56,7 @@
   width: 300px;
   background-color: white;
   overflow-y: auto;
-  box-shadow: -2px 0 5px rgba(170, 65, 65, 0.3);
+  box-shadow: -2px 0 5px #ffffff;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   z-index: 999;
@@ -95,7 +95,7 @@ a {
 }
 
 a:hover {
-  color: #db1616;
+  color: #ffffff;
 }
 
 /* Default styles for desktop */
@@ -106,7 +106,7 @@ a:hover {
   top: 0;
   left: 0;
   overflow: auto;
-  border-right: 1px solid rgba(185, 31, 31, 0.25);
+  border-right: 1px solid #ffffff;
   background: #f8f8f8;
   padding: 20px;
   transform: translateX(-100%);
@@ -155,7 +155,7 @@ a:hover {
   min-height: 60px;
   line-height: 60px;
   padding: 0 10px;
-  background-color: #156991;
+  background-color: #225495;
   color: #fff;
 }
 
@@ -167,7 +167,7 @@ a:hover {
 
 .listings .item {
   display: block;
-  border-bottom: 1px solid #9c8a8a;
+  border-bottom: 1px solid #ffff;
   padding: 10px;
   text-decoration: none;
 }
@@ -178,7 +178,7 @@ a:hover {
 
 .listings .item .title {
   display: block;
-  color: #156991;
+  color: #225495;
   font-weight: 700;
 }
 
@@ -188,11 +188,11 @@ a:hover {
 
 .listings .item.active .title,
 .listings .item .title:hover {
-  color: #8cc63f;
+  color: #00a389;
 }
 
 .listings .item.active {
-  background-color: #a37a7a;
+  background-color: #ffffffb7;
 }
 
 ::-webkit-scrollbar {
@@ -207,7 +207,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb{
-  background: #00853e;
+  background: #f0d722;
   border-radius: 0;
 }
 
@@ -231,7 +231,7 @@ a:hover {
 
 .mapboxgl-popup-close-button {
   display: block; /* Restore close button */
-  background: rgba(255, 251, 7, 0.884);
+  background: #f0d722;
   color: #333;
   font-size: 16px;
   cursor: pointer;
@@ -251,8 +251,8 @@ a:hover {
 .mapboxgl-popup-content h3 {
   font-size: 20px; /* Larger header */
   text-align: center;
-  background: #87c21a;
-  color: white;
+  background: #ffffff;
+  color: #225495;
   padding: 5px;
   border-radius: 0px 0px 0 0;
   margin: 0;
@@ -277,7 +277,7 @@ a:hover {
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
-  border-bottom-color: #91c949;
+  border-bottom-color: #ffffff;
 }
 .mapboxgl-popup-content ul {
   list-style-type: disc;
@@ -295,7 +295,7 @@ a:hover {
     height: 10%; /* Adjust height dynamically */
     position: relative;
     border-right: none;
-    border-bottom: 1px solid rgba(179, 22, 22, 0.25);
+    border-bottom: 1px solid #ffffff;
     overflow-y: scroll;
     /*flex: 1; /* Allow sidebar to grow/shrink */
     /*min-height: 50%; /* Minimum height on mobile */

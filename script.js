@@ -166,7 +166,7 @@ function createPopUp(currentFeature) {
   const popup = new mapboxgl.Popup({ closeOnClick: false })
     .setLngLat(currentFeature.geometry.coordinates)
     .setHTML(
-      `<h3>Descrption</h3><h4><Strong>${currentFeature.properties.Where}</Strong></h4>
+      `<h3><Strong>${currentFeature.properties.Where}</Strong></h3>
       <ul>${currentFeature.properties.Description.split('. ').map(sentence => `<li>${sentence}</li>`).join('')}</ul>`
     )
     .addTo(map);

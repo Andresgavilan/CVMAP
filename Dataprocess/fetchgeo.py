@@ -33,7 +33,8 @@ for record in records:
             "City": record[4],
             "Subtitle": record[5],
             "Description": record[6],
-            "More_Info" : record[7]
+            "More_Info" : record[7],
+            "URL": record[10]
         },
         "id": record[0]
     }
