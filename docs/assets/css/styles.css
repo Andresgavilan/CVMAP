@@ -29,6 +29,7 @@
   border-radius: 5px;
   z-index: 1000;
   max-width: 300px;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .floating-popup p {
@@ -358,7 +359,10 @@ a:hover {
     border-radius: 5px;
     z-index: 1000;
     max-width: 300px;
+    max-height: 350px;
+    overflow-y: auto; /* Enable vertical scrolling */
   }
+
   .floating-buttons {
     top: 35px;
     left: 10px;
@@ -435,7 +439,20 @@ a:hover {
       padding: 12px 24px; /* Adjust padding for smaller screens */
       font-size: 14px; /* Adjust font size for smaller screens */
   }
-  
+  .floating-popup {
+    position: fixed;
+    top: 250px;
+    left: 80px;
+    right: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 10px;
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+    max-width: 200px;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
   .heading{
     min-height: 0px;
     line-height: 0px;
